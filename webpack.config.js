@@ -14,8 +14,7 @@ module.exports = {
     isDevelopment && 'webpack-hot-middleware/client?timeout=1000'
   ].filter(Boolean),
   output: {
-    path: serverPublicPath,
-    publicPath: '/'
+    path: serverPublicPath
   },
   stats: 'minimal',
   devtool: 'source-map',

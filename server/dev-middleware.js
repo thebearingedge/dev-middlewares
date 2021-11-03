@@ -8,10 +8,16 @@ const config = require('../webpack.config')
 module.exports = function devMiddleware(publicPath) {
   const livereloadServer = livereload.createServer()
   livereloadServer.watch(publicPath)
+  livereloadServer.server.once('connection', () => {
+    setTimeout(() => livereloadServer.sendAllClients(JSON.stringify({
+      command: 'reload',
+      path: '/'
+    })), 100)
+  })
   const bundler = webpack(config)
   return [
     livereloadMiddleware(),
     webpackDevMiddleware(bundler),
-    webpackHotMiddleware(bundler, { heartbeat: 500 })
+    webpackHotMiddleware(bundler)
   ]
 }
