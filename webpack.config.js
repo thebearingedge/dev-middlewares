@@ -17,8 +17,8 @@ export default {
   ].filter(Boolean),
   output: {
     path: serverPublicPath,
-    publicPath: '/'
   },
+  stats: 'minimal',
   devtool: 'source-map',
   plugins: [
     isDevelopment && new webpack.HotModuleReplacementPlugin(),

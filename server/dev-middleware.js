@@ -8,10 +8,16 @@ import webpackConfig from '../webpack.config.js'
 export function devMiddleware(publicPath) {
   const livereloadServer = livereload.createServer()
   livereloadServer.watch(publicPath)
+  livereloadServer.server.once('connection', () => {
+    setTimeout(() => livereloadServer.sendAllClients(JSON.stringify({
+      command: 'reload',
+      path: '/'
+    })), 100)
+  })
   const bundler = webpack(webpackConfig)
   return [
     livereloadMiddleware(),
-    webpackDevMiddleware(bundler, { stats: 'minimal' }),
+    webpackDevMiddleware(bundler),
     webpackHotMiddleware(bundler)
   ]
 }
