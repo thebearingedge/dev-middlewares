@@ -1,17 +1,19 @@
-require('dotenv/config');
-const path = require('path');
-const webpack = require('webpack');
+import 'dotenv/config'
+import path from 'path'
+import webpack from 'webpack'
+
+const { pathname: __dirname } = new URL('.', import.meta.url)
 
 const clientPath = path.join(__dirname, 'client');
 const serverPublicPath = path.join(__dirname, 'server', 'public');
 
 const isDevelopment = process.env.NODE_ENV === 'development'
 
-module.exports = {
+export default {
   mode: process.env.NODE_ENV,
   entry: [
     clientPath,
-    isDevelopment && 'webpack-hot-middleware/client'
+    isDevelopment && 'webpack-hot-middleware/client?timeout=1000'
   ].filter(Boolean),
   output: {
     path: serverPublicPath,

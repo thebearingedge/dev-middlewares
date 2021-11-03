@@ -1,4 +1,4 @@
-if (module.hot) module.hot.accept()
+import.meta.webpackHot?.accept()
 
 fetch('/api/hello')
   .then(res => res.json())

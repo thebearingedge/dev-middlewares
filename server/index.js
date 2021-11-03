@@ -1,18 +1,18 @@
-require('dotenv/config')
-const path = require('path')
-const express = require('express')
+import 'dotenv/config'
+import path from 'path'
+import express from 'express'
+
+const { pathname: __dirname } = new URL('.', import.meta.url)
 
 const app = express()
-
 const publicPath = path.join(__dirname, 'public')
 
 if (process.env.NODE_ENV === 'development') {
-  const devMiddleware = require('./dev-middleware')
+  const { devMiddleware } = await import('./dev-middleware.js')
   app.use(devMiddleware(publicPath))
 }
 
-const staticMiddleware = express.static(publicPath)
-app.use(staticMiddleware)
+app.use(express.static(publicPath))
 
 app.get('/api/hello', (_req, res) => {
   res.json({ hello: 'world' })

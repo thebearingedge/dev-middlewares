@@ -2,6 +2,7 @@
   "name": "dev-middleware",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "main": "server/index.js",
   "scripts": {
     "start": "NODE_ENV=production node .",
