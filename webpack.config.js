@@ -4,8 +4,8 @@ import webpack from 'webpack'
 
 const { pathname: __dirname } = new URL('.', import.meta.url)
 
-const clientPath = path.join(__dirname, 'client');
-const serverPublicPath = path.join(__dirname, 'server', 'public');
+const clientPath = path.join(__dirname, 'client')
+const serverPublicPath = path.join(__dirname, 'server', 'public')
 
 const isDevelopment = process.env.NODE_ENV === 'development'
 
@@ -23,5 +23,26 @@ export default {
   plugins: [
     isDevelopment && new webpack.HotModuleReplacementPlugin(),
     isDevelopment && new webpack.NoEmitOnErrorsPlugin()
-  ].filter(Boolean)
-};
+  ].filter(Boolean),
+  resolve: {
+    extensions: [
+      '.js',
+      '.jsx'
+    ]
+  },
+  module: {
+    rules: [
+      {
+        test: /\.jsx$/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            plugins: [
+              '@babel/plugin-transform-react-jsx'
+            ]
+          }
+        }
+      }
+    ]
+  }
+}
