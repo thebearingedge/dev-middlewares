@@ -19,6 +19,7 @@ module.exports = {
   stats: 'minimal',
   devtool: 'source-map',
   plugins: [
+    new webpack.EnvironmentPlugin([]),
     isDevelopment && new webpack.HotModuleReplacementPlugin(),
     isDevelopment && new webpack.NoEmitOnErrorsPlugin()
   ].filter(Boolean)
