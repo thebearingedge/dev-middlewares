@@ -10,7 +10,7 @@ export default function App() {
 
   return (
     <>
-      <h1>Dev Middlewares</h1>
+      <h1>Dev Middleware</h1>
       <button onClick={handleClick}>Clicks {clicks}</button>
     </>
   )

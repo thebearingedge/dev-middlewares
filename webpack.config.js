@@ -11,19 +11,6 @@ const isDevelopment = process.env.NODE_ENV === 'development'
 
 export default {
   mode: process.env.NODE_ENV,
-  entry: [
-    clientPath,
-    isDevelopment && 'webpack-hot-middleware/client?timeout=1000'
-  ].filter(Boolean),
-  output: {
-    path: serverPublicPath,
-  },
-  stats: 'minimal',
-  devtool: 'source-map',
-  plugins: [
-    isDevelopment && new webpack.HotModuleReplacementPlugin(),
-    isDevelopment && new webpack.NoEmitOnErrorsPlugin()
-  ].filter(Boolean),
   resolve: {
     extensions: [
       '.js',
@@ -44,5 +31,19 @@ export default {
         }
       }
     ]
-  }
+  },
+  entry: [
+    clientPath,
+    isDevelopment && 'webpack-hot-middleware/client?timeout=1000'
+  ].filter(Boolean),
+  output: {
+    path: serverPublicPath,
+  },
+  stats: 'minimal',
+  devtool: 'source-map',
+  plugins: [
+    new webpack.EnvironmentPlugin([]),
+    isDevelopment && new webpack.HotModuleReplacementPlugin(),
+    isDevelopment && new webpack.NoEmitOnErrorsPlugin()
+  ].filter(Boolean)
 }

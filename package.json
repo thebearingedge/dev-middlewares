@@ -5,29 +5,29 @@
   "type": "module",
   "main": "server/index.js",
   "scripts": {
+    "dev": "nodemon .",
     "start": "NODE_ENV=production node .",
-    "dev": "NODE_ENV=development nodemon .",
     "build": "NODE_ENV=production webpack"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "dotenv": "^10.0.0",
-    "express": "^4.17.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.16.0",
-    "@babel/plugin-transform-react-jsx": "^7.16.0",
-    "babel-loader": "^8.2.3",
+    "@babel/core": "^7.17.9",
+    "@babel/plugin-transform-react-jsx": "^7.17.3",
+    "babel-loader": "^8.2.4",
     "connect-livereload": "^0.6.1",
     "livereload": "^0.9.3",
     "nodemon": "^2.0.15",
-    "webpack": "^5.64.4",
-    "webpack-cli": "^4.9.1",
-    "webpack-dev-middleware": "^5.2.2",
+    "webpack": "^5.72.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-middleware": "^5.3.1",
     "webpack-hot-middleware": "^2.25.1"
   }
 }
