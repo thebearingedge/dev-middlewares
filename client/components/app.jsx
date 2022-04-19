@@ -1,24 +1,20 @@
 import React from 'react'
-import io from 'socket.io-client'
+import { useHashRouter } from '../lib/hash-router'
 
 export default function App() {
 
-  const socketRef = React.useRef(null)
-  const [clicks, setClicks] = React.useState(0)
+  const router = useHashRouter()
 
-  const handleClick = React.useCallback(() => {
-    setClicks(clicks => clicks + 1)
-  }, [])
-
-  React.useEffect(() => {
-    socketRef.current = io('/')
-    return () => { socketRef.current.disconnect() }
-  }, [])
+  console.log('router path:', router.path)
 
   return (
     <>
       <h1>Dev Middleware</h1>
-      <button onClick={handleClick}>Clicks {clicks}</button>
+      <ul>
+        <li><a href="#foo">Foo</a></li>
+        <li><a href="#bar">Bar</a></li>
+        <li><a href="#baz">Baz</a></li>
+      </ul>
     </>
   )
 }
