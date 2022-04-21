@@ -44,6 +44,12 @@
         "named": "never",
         "asyncArrow": "always"
       }
+    ],
+    "no-unused-vars": [
+      "error",
+      {
+        "varsIgnorePattern": "^_"
+      }
     ]
   },
   "overrides": [

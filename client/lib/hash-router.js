@@ -48,6 +48,6 @@ const navigate = hash => {
 const HashRouterContext = React.createContext({
   path: '',
   params: new URLSearchParams(),
-  navigate: hash => {},
-  redirect: hash => {}
+  navigate: () => {},
+  redirect: () => {}
 });

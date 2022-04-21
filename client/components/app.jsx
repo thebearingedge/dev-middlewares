@@ -1,11 +1,12 @@
-import React from 'react'
-import { useHashRouter } from '../lib/hash-router'
+import React from 'react';
+import { useHashRouter } from '../lib/hash-router';
 
 export default function App() {
 
-  const router = useHashRouter()
+  const router = useHashRouter();
 
-  console.log('router path:', router.path)
+  // eslint-disable-next-line no-console
+  console.log('router path:', router.path);
 
   return (
     <>
@@ -16,5 +17,5 @@ export default function App() {
         <li><a href="#baz">Baz</a></li>
       </ul>
     </>
-  )
+  );
 }
