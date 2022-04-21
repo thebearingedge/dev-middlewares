@@ -5,7 +5,7 @@ import * as socketIO from 'socket.io';
 
 const app = express();
 const server = http.createServer(app);
-const _io = new socketIO.Server(server);
+const io = new socketIO.Server(server);
 
 const publicPathURL = new URL('./public', import.meta.url);
 
@@ -18,6 +18,15 @@ app.use(express.static(publicPathURL.pathname));
 
 app.get('/api/hello', (_req, res) => {
   res.json({ hello: 'world' });
+});
+
+io.on('connection', socket => {
+  socket.on('disconnect', () => {
+    // eslint-disable-next-line no-console
+    console.log('client disconnected:', socket.id);
+  });
+  // eslint-disable-next-line no-console
+  console.log('client connected:', socket.id);
 });
 
 server.listen(process.env.PORT, () => {
