@@ -27,6 +27,9 @@ export default {
           options: {
             plugins: [
               '@babel/plugin-transform-react-jsx'
+            ],
+            presets: [
+              '@babel/preset-env'
             ]
           }
         }
@@ -36,7 +39,7 @@ export default {
   stats: 'minimal',
   devtool: 'source-map',
   plugins: [
-    new webpack.EnvironmentPlugin(['NODE_ENV']),
+    new webpack.EnvironmentPlugin([]),
     isDevelopment && new webpack.HotModuleReplacementPlugin(),
     isDevelopment && new webpack.NoEmitOnErrorsPlugin()
   ].filter(Boolean)
