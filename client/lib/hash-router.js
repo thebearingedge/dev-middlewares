@@ -8,6 +8,7 @@ export function useHashRouter() {
 export function Redirect(props) {
   const router = useHashRouter()
   useEffect(() => router.redirect(props.to), [])
+  return null
 }
 
 export function HashRouter({ children }) {
@@ -45,7 +46,7 @@ const navigate = hash => {
 
 const HashRouterContext = React.createContext({
   path: '',
-  params: new URLSearchParams,
-  navigate: hash => { },
-  redirect: hash => { }
+  params: new URLSearchParams(),
+  navigate: hash => {},
+  redirect: hash => {}
 })
