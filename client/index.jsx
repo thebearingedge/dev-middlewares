@@ -1,16 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { HashRouter } from './lib/hash-router';
 import App from './components/app';
 
 import.meta.webpackHot?.accept();
+import.meta.webpackHot?.dispose(() => root.unmount());
 
-const root =
-  window.APP_ROOT ??=
-  ReactDOM.createRoot(document.querySelector('#root'));
+const root = ReactDOM.createRoot(document.querySelector('#root'));
 
-root.render(
-  <HashRouter>
-    <App />
-  </HashRouter>
-);
+root.render(<App />);

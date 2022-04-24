@@ -11,15 +11,27 @@ export function Redirect(props) {
   return null;
 }
 
+export function Route({ path, ...props }) {
+  const router = useHashRouter();
+  if (path !== router.path) return null;
+  if (props.children != null) return props.children;
+  if (props.component != null) {
+    return React.createElement(
+      props.component,
+      { ...props, router }
+    );
+  }
+  return null;
+}
+
 export function HashRouter({ children }) {
 
   const [hash, setHash] = React.useState(window.location.hash);
 
   const router = React.useMemo(() => {
-    const hashRoute = hash.replace(/^#/, '');
-    const [path, search = ''] = hashRoute.split('?');
-    const params = new URLSearchParams(search);
-    return { path, params, redirect, navigate };
+    const [path, search = ''] = hash.replace(/^#/, '').split('?');
+    const params = Object.fromEntries(new URLSearchParams(search));
+    return { path: '#' + path, params, redirect, navigate };
   }, [hash]);
 
   React.useEffect(() => {
@@ -47,7 +59,7 @@ const navigate = hash => {
 
 const HashRouterContext = React.createContext({
   path: '',
-  params: new URLSearchParams(),
+  params: {},
   navigate: () => {},
   redirect: () => {}
 });
