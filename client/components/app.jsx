@@ -20,13 +20,13 @@ export default function App() {
         <li><a href="#baz">Baz</a></li>
       </ul>
       <HashRouter>
-        <Route path="#foo">
+        <Route path="foo">
           <h1>Hello, Foo!</h1>
         </Route>
-        <Route path="#bar">
+        <Route path="bar">
           <h1>Hello, Bar!</h1>
         </Route>
-        <Route path="#baz">
+        <Route path="baz">
           <h1>Hello, Baz!</h1>
         </Route>
       </HashRouter>
