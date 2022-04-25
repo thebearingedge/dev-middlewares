@@ -1,6 +1,6 @@
 import React from 'react';
 import { io } from 'socket.io-client';
-import { HashRouter, Route } from '../lib/hash-router';
+import { HashRouter, Route, Link } from '../lib/hash-router';
 
 export default function App() {
 
@@ -15,9 +15,9 @@ export default function App() {
     <>
       <h1>Dev Middleware</h1>
       <ul>
-        <li><a href="#foo">Foo</a></li>
-        <li><a href="#bar">Bar</a></li>
-        <li><a href="#baz">Baz</a></li>
+        <li><Link href="foo">Foo</Link></li>
+        <li><Link href="bar">Bar</Link></li>
+        <li><Link href="baz">Baz</Link></li>
       </ul>
       <HashRouter>
         <Route path="foo">

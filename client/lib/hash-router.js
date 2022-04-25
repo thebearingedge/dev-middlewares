@@ -3,8 +3,8 @@ import React from 'react';
 const HashRouterContext = React.createContext({
   path: '',
   params: {},
-  navigate: () => { },
-  redirect: () => { }
+  navigate: () => {},
+  redirect: () => {}
 });
 
 export class HashRouter extends React.Component {
@@ -55,7 +55,17 @@ export class HashRouter extends React.Component {
   }
 }
 
+export const Link = React.forwardRef(Object.assign((props, ref) => {
+  const href = props.href.startsWith('#')
+    ? props.href
+    : '#' + props.href;
+  return React.createElement('a', { ...props, ref, href });
+}, { displayName: 'Link' }));
+
 export class Redirect extends React.Component {
+
+  static contextType = HashRouterContext;
+
   componentDidMount() {
     this.context.redirect(this.props.to);
   }
@@ -65,9 +75,10 @@ export class Redirect extends React.Component {
   }
 }
 
-Redirect.contextType = HashRouterContext;
-
 export class Route extends React.Component {
+
+  static contextType = HashRouterContext;
+
   render() {
     if (this.props.path !== this.context.path) return null;
     if (this.props.children != null) return this.props.children;
@@ -81,4 +92,18 @@ export class Route extends React.Component {
   }
 }
 
-Route.contextType = HashRouterContext;
+export function withRouter(Component) {
+  return class extends React.Component {
+
+    static displayName = `withRouter(${Component.name})`;
+
+    static contextType = HashRouterContext;
+
+    render() {
+      return React.createElement(
+        Component,
+        { ...this.props, router: { ...this.context } }
+      );
+    }
+  };
+}
