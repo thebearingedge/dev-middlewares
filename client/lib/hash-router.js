@@ -2,7 +2,7 @@ import React from 'react';
 
 const HashRouterContext = React.createContext({
   path: '',
-  params: {},
+  query: {},
   navigate: () => {},
   redirect: () => {}
 });
@@ -31,10 +31,10 @@ export class HashRouter extends React.Component {
 
   createRouter(hash) {
     const [path, search = ''] = hash.replace(/^#/, '').split('?');
-    const params = Object.fromEntries(new URLSearchParams(search));
+    const query = Object.fromEntries(new URLSearchParams(search));
     return {
       path,
-      params,
+      query,
       redirect: hash => {
         const url = new URL(window.location.href);
         url.hash = hash;
