@@ -77,6 +77,8 @@ export class Redirect extends React.Component {
 
 export class Route extends React.Component {
 
+  static defaultProps = { path: '' };
+
   static contextType = HashRouterContext;
 
   render() {

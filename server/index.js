@@ -16,8 +16,18 @@ if (process.env.NODE_ENV === 'development') {
 
 app.use(express.static(publicPathURL.pathname));
 
-app.get('/api/hello', (_req, res) => {
+app.get('/api/hello', (req, res) => {
   res.json({ hello: 'world' });
+});
+
+app.use('/api', (req, res) => {
+  res
+    .status(404)
+    .json({ error: `cannot ${req.method} ${req.originalUrl}` });
+});
+
+app.get('*', (req, res, next) => {
+  res.sendFile('index.html', { root: publicPathURL.pathname }, next);
 });
 
 io.on('connection', socket => {
@@ -31,5 +41,5 @@ io.on('connection', socket => {
 
 server.listen(process.env.PORT, () => {
   // eslint-disable-next-line no-console
-  console.log('app listening at', process.env.PORT);
+  console.log('\napp listening at port', process.env.PORT, '\n');
 });
