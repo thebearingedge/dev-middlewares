@@ -3,8 +3,8 @@ import webpack from 'webpack';
 
 const isDevelopment = process.env.NODE_ENV === 'development';
 
-const client = new URL('./client', import.meta.url);
-const serverPublic = new URL('./server/public', import.meta.url);
+const clientURL = new URL('./client', import.meta.url);
+const serverPublicURL = new URL('./server/public', import.meta.url);
 
 export default {
   mode: process.env.NODE_ENV,
@@ -12,16 +12,17 @@ export default {
     extensions: ['.js', '.jsx']
   },
   entry: [
-    client.pathname,
+    clientURL.pathname,
     isDevelopment && 'webpack-hot-middleware/client?timeout=1000'
   ].filter(Boolean),
   output: {
-    path: serverPublic.pathname
+    path: serverPublicURL.pathname
   },
   module: {
     rules: [
       {
-        test: /\.jsx$/,
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
           options: {
@@ -42,5 +43,11 @@ export default {
     new webpack.EnvironmentPlugin([]),
     isDevelopment && new webpack.HotModuleReplacementPlugin(),
     isDevelopment && new webpack.NoEmitOnErrorsPlugin()
-  ].filter(Boolean)
+  ].filter(Boolean),
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      name: 'vendor'
+    }
+  }
 };

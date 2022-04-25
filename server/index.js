@@ -41,5 +41,5 @@ io.on('connection', socket => {
 
 server.listen(process.env.PORT, () => {
   // eslint-disable-next-line no-console
-  console.log('\napp listening at port', process.env.PORT, '\n');
+  console.log('\napp listening on port', process.env.PORT, '\n');
 });
