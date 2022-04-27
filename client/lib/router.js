@@ -30,13 +30,13 @@ export class Router extends React.Component {
   }
 
   navigate(to) {
-    const url = new URL(to, window.location.host);
+    const url = new URL(to, window.location.href);
     window.history.pushState(null, '', url);
     this.setState({ url });
   }
 
   redirect(to) {
-    const url = new URL(to, window.location.host);
+    const url = new URL(to, window.location.href);
     window.history.replaceState(null, '', url);
     this.setState({ url });
   }
